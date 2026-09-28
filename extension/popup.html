@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ComUcate</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="card">
+    <header class="header">
+      <div class="logo-group">
+        <img src="icons/icon48.png" alt="ComUcate" class="logo">
+        <div>
+          <h1>ComUcate</h1>
+          <span class="badge">v4.0 • Multi-App Voice</span>
+        </div>
+      </div>
+      <div class="status-indicator" id="statusDot" title="Checking server status..."></div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="tabs">
+      <button class="tab-btn active" id="tabVoiceBtn" type="button">✨ My Voice</button>
+      <button class="tab-btn" id="tabSettingsBtn" type="button">⚙️ Connection</button>
+    </nav>
+
+    <!-- TAB 1: MY VOICE (BASE VOICE + ADAPTIVE VOICE) -->
+    <div class="tab-content active" id="tabVoiceContent">
+      
+      <!-- SUBSECTION A: EXPLICIT PREFERENCES (BASE VOICE & PLATFORM ADAPTIVE) -->
+      <div class="voice-card">
+        <div class="voice-card-header">
+          <span class="group-title">1. Adaptive Platform Voice</span>
+        </div>
+
+        <div class="section" style="margin-bottom: 6px;">
+          <label class="setting-row">
+            <div>
+              <span class="setting-title" style="font-weight: 600;">Auto-Adapt by Platform</span>
+              <div style="font-size: 11px; color: var(--text-muted); font-weight: normal;">Teams is Polite/Pro, Insta is Casual, WhatsApp is Friendly</div>
+            </div>
+            <input type="checkbox" id="autoAdaptToggle" class="switch" checked>
+          </label>
+        </div>
+
+        <div class="section" style="margin-bottom: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <label for="platformSelector" class="section-label" style="margin-bottom: 0;">Configure Style For</label>
+            <span class="badge" id="activeAppBadge" style="display: none; font-size: 10px;">Active Tab</span>
+          </div>
+          <select id="platformSelector" class="select-input" style="font-weight: 600;">
+            <option value="global">🌐 Global Voice (Default Fallback)</option>
+            <option value="teams">💼 Microsoft Teams (Polite & Professional)</option>
+            <option value="instagram">📸 Instagram DMs (Casual & Playful)</option>
+            <option value="whatsapp">💬 WhatsApp (Friendly & Warm)</option>
+            <option value="linkedin">👔 LinkedIn (Polite & Professional)</option>
+            <option value="gmail">📧 Gmail (Clean & Respectful)</option>
+            <option value="discord">🎮 Discord (Concise & Chill)</option>
+            <option value="telegram">✈️ Telegram (Direct & Snappy)</option>
+          </select>
+          <div id="platformNotice" style="font-size: 11px; color: var(--text-muted); margin-top: 4px; display: flex; justify-content: space-between; align-items: center;">
+            <span id="platformNoticeText">Auto-adapts automatically when you switch apps.</span>
+            <button type="button" id="resetPlatformBtn" style="background: none; border: none; color: var(--primary); font-size: 11px; cursor: pointer; text-decoration: underline; display: none;">Reset to Default</button>
+          </div>
+        </div>
+
+        <div class="section">
+          <label for="personalityPreset" class="section-label">Personality Preset</label>
+          <select id="personalityPreset" class="select-input">
+            <option value="Confident + Funny">😎 Confident + Funny (Social Default)</option>
+            <option value="Smart + Casual">🧠 Smart + Casual</option>
+            <option value="Flirty + Playful">❤️ Flirty + Playful</option>
+            <option value="Direct + Fast">⚡ Direct + Fast</option>
+            <option value="Professional + Polite">👔 Professional + Polite (Workplace Default)</option>
+            <option value="Professional + Friendly">💼 Professional + Friendly</option>
+            <option value="Friendly + Casual">💬 Friendly + Casual (WhatsApp Default)</option>
+            <option value="Custom">🎨 Custom Voice</option>
+          </select>
+        </div>
+
+        <div class="grid-2">
+          <div class="section">
+            <label for="languageSelect" class="section-label">Language / Script</label>
+            <select id="languageSelect" class="select-input">
+              <option value="Hinglish">Hinglish (Roman script)</option>
+              <option value="English (Casual)">English (Casual)</option>
+              <option value="English (US)">English (US)</option>
+              <option value="English (UK)">English (UK)</option>
+              <option value="Hindi">Hindi (Devanagari)</option>
+              <option value="Spanish">Spanish</option>
+            </select>
+          </div>
+
+          <div class="section">
+            <label for="replyLengthSelect" class="section-label">Reply Length</label>
+            <select id="replyLengthSelect" class="select-input">
+              <option value="short">Short (1-2 lines)</option>
+              <option value="medium">Medium</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="section">
+            <label for="humorSelect" class="section-label">Humor Level</label>
+            <select id="humorSelect" class="select-input">
+              <option value="none">None</option>
+              <option value="medium">Medium (Banter)</option>
+              <option value="high">High (Witty / Sarcastic)</option>
+            </select>
+          </div>
+
+          <div class="section">
+            <label for="emojiSelect" class="section-label">Emoji Usage</label>
+            <select id="emojiSelect" class="select-input">
+              <option value="none">Minimal / None</option>
+              <option value="occasional">Occasional (😭, 💀)</option>
+              <option value="frequent">Frequent</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="section">
+          <label class="setting-row">
+            <span class="setting-title">Allow Playful Flirting</span>
+            <input type="checkbox" id="flirtingToggle" class="switch" checked>
+          </label>
+        </div>
+
+        <div class="section">
+          <label for="commonPhrases" class="section-label">My Slang & Signature Words</label>
+          <input type="text" id="commonPhrases" class="text-input" placeholder="bhai, haan, acha, lol, 😭, yaar, sahi hai">
+        </div>
+
+        <button id="saveProfileBtn" class="btn primary-btn full-btn" type="button">Save Base Preferences</button>
+        <div class="save-status" id="profileSaveStatus"></div>
+      </div>
+
+      <!-- SUBSECTION B: ADAPTIVE VOICE (AUTOMATIC LEARNING) -->
+      <div class="voice-card adaptive-card">
+        <div class="voice-card-header">
+          <span class="group-title">2. Adaptive Voice (Learned Style)</span>
+          <span class="status-pill active" id="learningStatusPill">Active</span>
+        </div>
+
+        <p class="card-caption">
+          ComUcate continuously learns from messages <em>you send</em> to sound authentically like you.
+        </p>
+
+        <div class="stats-summary" id="learningStatsBox">
+          <div class="stats-row">
+            <span>Messages analyzed:</span>
+            <strong id="learnedCountText">0 sent messages</strong>
+          </div>
+          <div class="stats-row">
+            <span>Last updated:</span>
+            <span id="learnedUpdatedText">Not yet started</span>
+          </div>
+        </div>
+
+        <div class="adaptive-bullets">
+          <div class="bullet-item">• Sentence length & lowercase flow</div>
+          <div class="bullet-item">• Punctuation & Hinglish mix</div>
+          <div class="bullet-item">• Natural slang & emoji habits</div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 6px;">
+          <button id="toggleLearningBtn" class="btn secondary-btn" type="button">Pause Learning</button>
+          <button id="resetLearnedBtn" class="btn danger-btn" type="button">Reset Learned Style</button>
+        </div>
+        <div class="save-status" id="adaptiveStatusText"></div>
+      </div>
+    </div>
+
+    <!-- TAB 2: CONNECTION & SETTINGS -->
+    <div class="tab-content" id="tabSettingsContent">
+      <div class="status-banner" id="statusBanner">
+        <span class="status-dot"></span>
+        <span class="status-text" id="statusText">Checking server status...</span>
+      </div>
+
+      <section class="section">
+        <label class="setting-row">
+          <span class="setting-title">Enable ComUcate Widget</span>
+          <input type="checkbox" id="enabledToggle" class="switch" checked>
+        </label>
+      </section>
+
+      <section class="section">
+        <label for="serverUrl" class="section-label">Server Endpoint URL</label>
+        <div class="input-group">
+          <input type="url" id="serverUrl" placeholder="http://localhost:3000" spellcheck="false" class="text-input">
+          <button id="saveServerBtn" class="btn secondary-btn" type="button">Save</button>
+        </div>
+        <div class="status-meta" id="statusMeta"></div>
+      </section>
+
+      <footer class="footer">
+        <button id="testBtn" class="btn secondary-btn" type="button">Test Server Connection</button>
+        <div class="helper-text">
+          Active on <strong>WhatsApp, Instagram, Telegram, Discord, LinkedIn, Teams & Gmail</strong>.
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

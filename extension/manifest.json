@@ -1,0 +1,104 @@
+{
+  "manifest_version": 3,
+  "name": "ComUcate — AI Communication Companion",
+  "version": "4.2.0",
+  "description": "Adaptive AI communication companion for WhatsApp, Instagram, Telegram, Discord, LinkedIn, Teams & Gmail.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ComUcate Settings",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "http://localhost:*/*",
+    "http://127.0.0.1:*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.instagram.com/*"
+      ],
+      "js": [
+        "instagram-bridge.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://web.whatsapp.com/*",
+        "https://www.instagram.com/*",
+        "https://instagram.com/*",
+        "https://web.telegram.org/*",
+        "https://discord.com/*",
+        "https://*.discord.com/*",
+        "https://www.linkedin.com/*",
+        "https://linkedin.com/*",
+        "https://mail.google.com/*",
+        "https://teams.microsoft.com/*",
+        "https://*.teams.microsoft.com/*",
+        "https://teams.live.com/*",
+        "https://*.teams.live.com/*",
+        "https://teams.cloud.microsoft/*",
+        "https://*.teams.cloud.microsoft/*",
+        "https://teams.office.com/*",
+        "https://*.teams.office.com/*",
+        "https://gov.teams.microsoft.us/*",
+        "https://*.teams.microsoft.us/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "content.css",
+        "icons/*",
+        "instagram-bridge.js"
+      ],
+      "matches": [
+        "https://web.whatsapp.com/*",
+        "https://www.instagram.com/*",
+        "https://instagram.com/*",
+        "https://web.telegram.org/*",
+        "https://discord.com/*",
+        "https://*.discord.com/*",
+        "https://www.linkedin.com/*",
+        "https://linkedin.com/*",
+        "https://mail.google.com/*",
+        "https://teams.microsoft.com/*",
+        "https://*.teams.microsoft.com/*",
+        "https://teams.live.com/*",
+        "https://*.teams.live.com/*",
+        "https://teams.cloud.microsoft/*",
+        "https://*.teams.cloud.microsoft/*",
+        "https://teams.office.com/*",
+        "https://*.teams.office.com/*",
+        "https://gov.teams.microsoft.us/*",
+        "https://*.teams.microsoft.us/*"
+      ]
+    }
+  ]
+}
